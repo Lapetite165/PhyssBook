@@ -1,0 +1,10 @@
+
+export const TOGGLE_FAVORITE_ASSO:String = 'TOGGLE_FAVORITE_ASSO'
+
+export const TOGGLE_FAVORITE_POST:String = 'TOGGLE_FAVORITE_POST'
+
+export const READ_POST:String = 'READ_POST'
+
+export const SEND_NOTIFICATION_TOKEN:String = 'SEND_NOTIFICATION_TOKEN'
+
+export const CALENDAR_ID = 'CALENDAR_ID'
