@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Asso-app",
-    "slug": "Asso-app",
+    "name": "PhyssBook",
+    "slug": "PhyssBook",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -32,10 +32,6 @@
       "favicon": "./assets/favicon.png"
     },
     "userInterfaceStyle":"automatic",
-    "plugins":[
-      [
-        "expo-notifications"
-      ]
-    ]
+    "plugins":["expo-notifications"]
   }
 }
