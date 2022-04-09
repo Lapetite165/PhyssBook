@@ -8,7 +8,6 @@ import thunk from "redux-thunk";
 //Importer les fonction pour garder en memoire les préférences de l'utilisateur via Redux-Persist
 import {persistReducer, persistStore} from "redux-persist";
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { readPost } from "./Actions";
 
 const rootPersistConfig = {
     key:'root',
