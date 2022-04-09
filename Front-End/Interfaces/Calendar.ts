@@ -1,9 +1,5 @@
-import { Source } from "expo-calendar"
+import { Calendar as ExpoCalendar} from "expo-calendar";
 
-
-export class defaultCalendarSourceAndroid implements Source{
-    isLocalAccount: true;
-    name: 'Expo-calendar';
-    id?: string;
-    type: string
+export interface Calendar extends ExpoCalendar{
+    calendarId?: any
 }
