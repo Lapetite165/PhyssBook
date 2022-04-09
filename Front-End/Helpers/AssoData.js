@@ -11,7 +11,6 @@ export const AssoData = [
       overview:"Le comit'ss est responsable de la PTT et de tout ce qui est en lien avec les traditions au tabagn'ss.",
       color:['red', 'black'],
       font:'Helvetica',
-      calendarId:undefined,
       members:[
          {
             id:11,
@@ -69,7 +68,6 @@ export const AssoData = [
       overview:"GaSole est l'association environnementale et solidaire du campus. Elle organise les évènements liés à l’environnement et les actions solidaires. Notre but est de sensibiliser les PG aux enjeux concernant ces thématiques et de leur proposer des façons d’agir à notre échelle pour avoir un impact positif.",
       color:'#CDFFF1',
       font:'Zagot',
-      calendarId:undefined,
       members:[
          {
          id:21,
@@ -699,7 +697,7 @@ export const AssoData = [
            image:''
         }]
    }
-   ]
+]
 
 export const DevData = [
    {
@@ -827,3 +825,14 @@ export const PostData =[
       image:''
    }
 ]
+
+export const user = {
+   name:'Yohan',
+   bucque:"Le'yo",
+   famss:"ҍ",
+   email:"yohan.nicolay@gadz.org",
+   id:1,
+   userStatus:0,
+   assoBools:[],
+   posts:[]
+}

@@ -23,7 +23,6 @@ class LoadingPage extends React.Component {
     }
 
     componentDidMount = () => {
-        console.log('ComponentDidMount')
         this._areFontsLoaded()
     }
 
@@ -66,7 +65,7 @@ class LoadingPage extends React.Component {
     _getPushToken = () => {
         this.setState({areLoading:'du token 4/4'})
         registerForPushNotificationsAsync().then(token => {
-            console.log(token)
+            //console.log(token)
             if (token != undefined){
                 this.props.navigation.navigate('Mon Profil Login', {screen:'Profil'})
                 //this.props.dispatch(sendNotificationToken(token))
@@ -75,7 +74,6 @@ class LoadingPage extends React.Component {
     }
 
     render(){
-        console.log('LoadingPage')
         return(
             <View style={styles.mainview}>
                 <ActivityIndicator size='large'color='#050C98' />

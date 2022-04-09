@@ -1,15 +1,20 @@
 import { StyleSheet } from 'react-native'
 
-export function manageCalendarColors(color) {
-    console.log('ManageCalendarColors')
-    console.log(typeof color) 
+export function getStringColors(color) {
     if (typeof color === 'string' ){
       return color
     } else {
-      console.log('Color2')
       return color[0]
     }
-  }
+}
+
+export function getArrayColors(color){
+    if (typeof color === 'string' ){
+        return [color,color]
+      } else {
+        return color
+      }
+}
 
 export function applyTheme(type){
     switch (type){

@@ -5,7 +5,6 @@ export const calendarStatusCheck = async () => {
     const calendarStatus = await requestCalendarPermissionsAsync()
     console.log(calendarStatus)
     if (calendarStatus.granted) {
-      console.log('Calendar Permission Granted')
       const calendars = await getCalendarsAsync(
         EntityTypes.EVENT
       )

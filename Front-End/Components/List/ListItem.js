@@ -37,8 +37,6 @@ class ListItem extends React.Component {
   }
 
   _displayReadBand = () => {
-    console.log("DisplayReadBand")
-    console.log()
     const {data, readPost} = this.props
     if (readPost != undefined && readPost.findIndex(item => item === data.id) != -1 ){
       return (

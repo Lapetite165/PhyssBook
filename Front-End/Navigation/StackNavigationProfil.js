@@ -24,7 +24,8 @@ export default class StackNavigationProfil extends React.Component{
                     name='Mon Profil'
                     component={Profil}
                     options={{
-                        headerBackVisible:false
+                        headerBackVisible:false,
+                        headerTitle:"Profil"
                     }}
                 />
                 <Stack.Screen

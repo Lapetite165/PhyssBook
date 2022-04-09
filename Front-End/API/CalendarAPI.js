@@ -25,7 +25,6 @@ export async function getCalendarsId(){
         .then(calendars => {
           if (calendars != undefined){
             const filteredCalendars = calendars.filter(item => item.ownerAccount === "personal")
-            console.log(filteredCalendars)
           }
         })
     )

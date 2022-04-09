@@ -44,7 +44,8 @@ class StackNavigationSearch extends React.Component{
                     name='Post'
                     options={()=>({
                         headerRight: ()=>(this._displayIcon('search-outline'))
-                    })}
+                    })
+                }
                 >
                     {(props)=><Search {...props} extraData={properties}/>}
                 </Stack.Screen>

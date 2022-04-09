@@ -43,7 +43,6 @@ export default class Organigramme extends React.Component {
 
   //Fonction permettant d'afficher 
   _toggleSearchBar = () => {
-    console.log('DisplaySearchBar')
     //console.log(this.props.extraData)
     if(this.props.extraData){
       return (
@@ -69,7 +68,6 @@ export default class Organigramme extends React.Component {
 
   //On fait passer les props utilisée dans le component List
   render(){
-    console.log('Organigramme')
     return (
       <View style={styles.main_container}>
         {this._toggleSearchBar()}

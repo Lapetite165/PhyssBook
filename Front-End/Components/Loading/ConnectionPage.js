@@ -45,7 +45,7 @@ class ConnectionPage extends React.Component {
                 <View>
                     <Text 
                         style={styles.forgot_button}
-                        onPress={()=>{alert('Contacte un administrateur.')}}
+                        onPress={()=>{this.props.navigation.navigate("Mot de passe oublié")}}
                     >Mot de passe oublié ?</Text>
                 </View>
                 <Pressable 
