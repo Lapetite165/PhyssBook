@@ -10,21 +10,20 @@ class List extends React.Component {
     super(props)
   }
 
+  //Navigation
   _displayDetailsInTheList = (idDetails) => {
-    console.log("Display post " + idDetails)
     this.props.navigation.navigate('Détails', {idDetails: idDetails})
-    console.log('navigate')
   }
 
+  //Fournir les favoris à la liste
   _dispatchProps = (type, item) => {
-    console.log('DispatchProps')
-    //console.log(this)
     switch (type){
       case 'post':
-        console.log('Post')
-        console.log(this.props.favorite.Post)
+        //console.log('Post')
+        //console.log(this.props.favorite.Post)
         return (this.props.favorite.Post.findIndex(data => data.id === item.id) !== -1) ? true : false
       case 'asso':
+        //console.log('Asso')
         //console.log(this.props.favorite.Asso)
         return (this.props.favorite.Asso.findIndex(data => data.id === item.id) !== -1) ? true : false
       default :
@@ -33,7 +32,6 @@ class List extends React.Component {
   }
 
   render() {
-      console.log('List')
     return (
       <FlatList
         style={styles.list}
@@ -71,9 +69,9 @@ const styles = StyleSheet.create({
 
 //On récupère le state du store de reducers
 const mapStateToProps = (state) => {
-  console.log('MapStateToProps for List')
-  console.log(state)
-  console.log('Promise.result')
+  //console.log('MapStateToProps for List')
+  //console.log(state)
+  //console.log('Promise.result')
   return {
     favorite: {
       Post: state.post.favoritePost,

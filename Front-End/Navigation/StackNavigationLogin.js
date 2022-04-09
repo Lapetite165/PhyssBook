@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import Navigation from "./MainNavigation"
 import LoadingPage from "../Components/Loading/LoadingPage"
 import ConnectionPage from "../Components/Loading/ConnectionPage"
+import { FrogottenPassword } from "../Components/Loading/ForgottenPassword"
 
 
 export default class StackNavigationLogin extends React.Component{
@@ -35,6 +36,13 @@ export default class StackNavigationLogin extends React.Component{
                         component={Navigation}
                         options={{
                             headerBackVisible:false
+                        }}
+                    />
+                    <Stack.Screen
+                        name="Mot de passe oublié"
+                        component={FrogottenPassword}
+                        options={{
+                            headerShown:true
                         }}
                     />
                 </Stack.Navigator>

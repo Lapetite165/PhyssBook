@@ -44,9 +44,7 @@ export default class StackNavigationAsso extends React.Component{
             <Stack.Navigator>
                 <Stack.Screen 
                     name='Asso et Comités'
-                    options={{
-                        headerShown:true
-                    },
+                    options={
                         ()=>({headerRight: ()=>(this._displayIcon('search-outline'))})
                     }
                 >

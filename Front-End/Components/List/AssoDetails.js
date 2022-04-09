@@ -1,7 +1,7 @@
 //Importer React
 import React from "react"
 //Importer les components React Native
-import { StyleSheet, View, ActivityIndicator, ScrollView, Text, Image, Pressable } from "react-native"
+import { StyleSheet, View, ActivityIndicator, ScrollView, Text, Image, Pressable, Button } from "react-native"
 //Importer React-redux pour le state global
 import { connect } from "react-redux"
 //Importer les actions à effectuer par Redux
@@ -13,7 +13,7 @@ import { getAssoDetailsFromApi } from "../../API/AssoDataAPI"
 import MemberItem from "./MembersItem"
 //Importer les thêmes pour les assos
 import { LinearGradient } from "expo-linear-gradient"
-import { applyTheme } from "../../Themes/ApplyTheme"
+import { applyTheme, getArrayColors } from "../../Themes/ApplyTheme"
 
 class AssoDetails extends React.Component {
 
@@ -38,8 +38,6 @@ class AssoDetails extends React.Component {
 
   //Animation qui permet de voir si l'asso est dans les favoris et retourne une image coeur plein/vide
   _displayFavoriteImage = () => {
-    console.log('DisplayFavoriteImage')
-    console.log(this.props)
     let sourceImage = require('../../Images/ic_favorite_border.png')
     //Si l'asso fait partie du state global favoriteAsso
     if (this.props.favorite.findIndex(item => item.id == this.state.asso.id) !== -1) {
@@ -56,7 +54,7 @@ class AssoDetails extends React.Component {
   
   //Fonction qui permet d'ajouter/retirer une asso des favoris dans le state global redux
   _handleToggleFavorite = () => {
-    console.log('HandleToggleFavorite')
+    //console.log('HandleToggleFavorite')
     //console.log(this)
     this.setState({isLoading:true})
     this.props.toggleFavoriteAssoAsync(this.state.asso)
@@ -66,12 +64,11 @@ class AssoDetails extends React.Component {
   //Une fois que la vue se re-rend, on appelle la fonction displayAsso (analogue à displayPost) pour faire afficher les détails
   _displayAsso = () => {
     const asso = this.state.asso
-    console.log('DisplayAsso')
     if (asso != undefined) {
-      console.log(asso)
+      //console.log(asso)
       //style={applyTheme(asso.title).main_container}
       return(
-        <LinearGradient colors={this._manageColors()}>
+        <LinearGradient colors={getArrayColors(asso.color)}>
           <Image
             style={styles.image}
             source={{uri:getImageFromApi(asso.previewImage)}}
@@ -93,16 +90,14 @@ class AssoDetails extends React.Component {
     }
   }
 
-  //permet aux assos de choisir un fond uni ou un fond en dégradé
-  _manageColors = () => {
-    const color = this.state.asso.color
-    console.log('ManageColors')
-    console.log(typeof color) 
-    if (typeof color === 'string' ){
-      return [color, color]
-    } else {
-      console.log('Color2')
-      return color
+  _displayCalendarId(){
+    const favorite = this.props.favorite
+    const asso = this.state.asso
+    if (asso != undefined && favorite != undefined){
+      //console.log(favorite.filter((item) => item.title === asso.title))
+      return (
+        <Text>No</Text>
+      )
     }
   }
 
@@ -117,12 +112,9 @@ class AssoDetails extends React.Component {
   }
 
   render() {
-    //const idDetails = this.props.route.params.idDetails
-    console.log('Render')
-    //console.log(idDetails)
-    //console.log(this)
     return (
       <ScrollView style={styles.main_container}>
+        {this._displayCalendarId()}
         {this._displayAsso()}
         {this._displayLoading()}
       </ScrollView>
@@ -184,7 +176,6 @@ const styles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => {
-  console.log('MapStateToProps')
   return {
     favorite: state.asso.favoriteAsso
   }

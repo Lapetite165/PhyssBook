@@ -5,6 +5,8 @@ import { readPost, toggleFavoritePost } from "../../Store/Actions"
 import { getImageFromApi } from '../../API/TMDBAPI'
 import { PostData } from "../../Helpers/AssoData"
 import { applyTheme } from "../../Themes/ApplyTheme"
+//Importer les interfaces TS
+import { Post } from "../../Interfaces/Post"
 
 class PostDetails extends React.Component {
 

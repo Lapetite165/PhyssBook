@@ -1,16 +1,15 @@
 import React from "react";
 import { Button, StyleSheet, Text, View, Linking, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { user } from "../../Helpers/AssoData";
 
 class Profil extends React.Component {
 
     constructor(props){
         super(props)
-    }
-
-    _displayView = (view) => {
-        console.log('Display Favorites')
-        this.props.navigation.navigate(view)
+        this.state={
+            user:user
+        }
     }
 
     _openLink(){
@@ -27,25 +26,29 @@ class Profil extends React.Component {
 
 
     render () {
-        console.log('Profil')
-        console.log(this)
+        const user = this.state.user
         return (
-            <View>
-                <Text style={styles.header}>Bonjoür Utilisateur</Text>
+            <View style={styles.body}>
+                <Text style={styles.header}>Bonjoür</Text>
+                <Text style={styles.header}>{user.bucque} {user.famss}</Text>
                 <Text style={styles.title}>Description</Text>
                 <Text style={styles.description}>
                     Ici tu pourras retrouver toütes les informations nécessaires poür vivre un an'ss incr au TBK.
                 </Text>
                 <Text onPress={() => {this._openLink()}} style={styles.borgia}>Borgia</Text>
-                <Text onPress={() => {this._displayView('Favoris')}} style={styles.borgia} >Favoris</Text>
+                <Text onPress={() => {this.props.navigation.navigate('Favoris')}} style={styles.borgia} >Mes favoris</Text>
                 <View style={styles.button_container}>
                     <Button
                         title='Développement'
-                        onPress={() => {this._displayView('Développeurs')}}
+                        onPress={() => {this.props.navigation.navigate('Développeurs')}}
                     />
                     <Button
-                        title='CreatePost'
-                        onPress={() => {this._displayView('CreatePost')}}
+                        title='Create Post'
+                        onPress={() => {this.props.navigation.navigate('CreatePost')}}
+                    />
+                    <Button
+                        title='Clear Storage'
+                        onPress={() => {this._clearStorage()}}
                     />
                 </View>
             </View>
@@ -56,23 +59,26 @@ class Profil extends React.Component {
 const styles = StyleSheet.create({
     header:{
         textAlign:'center',
-        fontSize:40,
-        fontFamily:'Zagots'
+        fontSize:60,
+        fontFamily:'Zagots',
+        paddingVertical:3
+    },
+    body:{
+        paddingVertical:5,
+        paddingHorizontal:3
     },
     title:{
         fontFamily:'Zagots',
         marginVertical:5,
-        marginLeft:3,
-        fontSize:20
+        fontSize:30,
+        textDecorationLine:"underline"
     },
     description:{
         marginBottom:5,
         fontFamily:'Zagots', 
-        fontSize:15
+        fontSize:20
     },
     button_container:{
-        width:100,
-        height:100,
         alignItems:'center',
         backgroundColor:'gray'
     },
