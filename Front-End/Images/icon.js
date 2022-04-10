@@ -1,3 +1,5 @@
+import React from "react"
+import Ionicons from '@expo/vector-icons/Ionicons'
 
 export function getIcon(name,action){
     return(
