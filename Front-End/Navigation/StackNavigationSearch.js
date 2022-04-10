@@ -1,11 +1,12 @@
 //Importer React
 import React from "react"
-//Importer les components à utiliser pour la navigation
+//Importer les components à utiliser pour la navigation et les icons
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import Ionicons from '@expo/vector-icons/Ionicons'
+import { getIcon } from "../Images/icon"
 //Importer les vues
 import Search from "../Components/Post/Search"
 import PostDetails from "../Components/Post/PostDetails"
+
 
 
 
@@ -25,15 +26,6 @@ class StackNavigationSearch extends React.Component{
         this.setState({searchBarShown:show})
     }
 
-    //Définition de l'icon via Ionicons
-    _displayIcon=(title)=>(
-        <Ionicons 
-            onPress={()=>this._toggleSearchBar()}
-            name={title}
-            size={30}
-        />
-    )
-
     //Ecriture de la navigation avec React Navigation 5+
     render(){
         const Stack = createNativeStackNavigator()
@@ -43,7 +35,7 @@ class StackNavigationSearch extends React.Component{
                 <Stack.Screen 
                     name='Post'
                     options={()=>({
-                        headerRight: ()=>(this._displayIcon('search-outline'))
+                        headerRight: ()=>getIcon('search-outline',this._toggleSearchBar())
                     })
                 }
                 >
