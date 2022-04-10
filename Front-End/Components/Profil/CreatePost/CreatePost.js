@@ -1,7 +1,7 @@
 //Importer React
 import React from "react";
 //Importer les components nécéssaires
-import { Text, TextInput, View, StyleSheet, Button, Pressable, ScrollView } from "react-native";
+import { Text, TextInput, View, StyleSheet, Button, Pressable, ScrollView, FlatList } from "react-native";
 import RNDateTimePicker from '@react-native-community/datetimepicker'
 import Checkbox from "expo-checkbox";
 import { Picker } from "@react-native-picker/picker";
@@ -123,16 +123,13 @@ export default class CreatePost extends React.Component {
     _showDocumentsSelector = (documentype) =>{
         switch(documentype) {
             //Image de fond
-            case 'BackgroundImagePicker':
+            case 'BackgroundImage':
                 return this.state.backgroundImage
             //Images
-            case 'ImagePicker':
+            case 'Images':
                 return this.state.postImages
-            //Organizateurs
-            case 'OrganizersPicker':
-                return this.organizers
             //Documents
-            default :
+            case 'Documents':
                 return this.state.documents
         }
     }
@@ -140,6 +137,13 @@ export default class CreatePost extends React.Component {
     //Méthode générale pour sélectionner un document
     _picDocuments = (documentype) => {
         const items = this._showDocumentsSelector(documentype)
+        console.log(this.state)
+        console.log("BGI")
+        console.log(this.state.backgroundImage)
+        console.log("Doc")
+        console.log(this.state.documents)
+        console.log("Img")
+        console.log(this.state.postImages)
         return (
             <View>
                 <Button title={documentype} onPress={() => this._documentsSelector(documentype)} />
@@ -147,14 +151,16 @@ export default class CreatePost extends React.Component {
                     scrollEnabled={false}
                     data={items}
                     keyExtractor={(item) => items.indexOf(item) }
-                    renderItem={({item}) => (
+                    renderItem={({item}) =>{ 
+                        console.log(item)
+                        return (
                         <View style={styles.document_item} >
                             <Text>{">" + item.name}</Text>
                             <Pressable onPress={()=>{this._removeFromList(documentype, item)}}>
                                 {getIcon("close-circle-outline")}
                             </Pressable>
                         </View>  
-                    )}
+                    )}}
                 />
             </View>
         )
@@ -165,7 +171,7 @@ export default class CreatePost extends React.Component {
         let id
         //console.log('RemoveFromList')
         switch(documentype){
-            case 'BackgroundImagePicker':
+            case 'BackgroundImage':
                 //console.log(this.state)
                 //console.log(item)
                 id = this.state.backgroundImage.indexOf(item)
@@ -177,7 +183,7 @@ export default class CreatePost extends React.Component {
                     this.setState({backgroundImage:backgroundImage})
                 }
             break
-            case 'ImagePicker':
+            case 'Images':
                 //console.log(this.state)
                 //console.log(item)
                 id = this.state.postImages.indexOf(item)
@@ -189,19 +195,7 @@ export default class CreatePost extends React.Component {
                     this.setState({postImages:images})
                 }
             break
-            case 'OrganizersPicker':
-                //console.log(this.state)
-                //console.log(item)
-                id = this.organizers.indexOf(item)
-                //console.log(id)
-                if (id != -1) {
-                    const organizers = [...this.organizers]
-                    images.splice(id, 1)
-                    //console.log(organizers)
-                    this.organizers=organizers
-                }
-            break
-            default:
+            case 'Documents':
                 //console.log(this.state)
                 //console.log(item)
                 id = this.state.documents.indexOf(item)
@@ -212,17 +206,20 @@ export default class CreatePost extends React.Component {
                     //console.log(documents)
                     this.setState({documents:documents})
                 }
+            break
 
         }
     }
 
     //Gérer la sélection pour le selecteur de documents
     _documentsSelector = (documentype) =>{
+        console.log(documentype)
         switch(documentype) {
             //Image de fond
-            case 'BackgroundImagePicker':
+            case 'BackgroundImage':
+                console.log('BGI')
                 getDocumentAsync().then((result) => {
-                    if (!result.cancelled) {
+                    if (result.type === "success") {
                         this.setState({backgroundImage:[...this.state.backgroundImage,result]})
                     } else {
                         alert("Choix de l'image annulé")
@@ -230,9 +227,10 @@ export default class CreatePost extends React.Component {
                 })
             break
             //Images
-            case 'ImagePicker':
+            case 'Images':
+                console.log('Img')
                 getDocumentAsync().then((result) => {
-                    if (!result.cancelled) {
+                    if (result.type === "success") {
                         this.setState({postImages:[...this.state.postImages,result]})
                     } else {
                         alert("Choix de l'image annulé")
@@ -240,14 +238,16 @@ export default class CreatePost extends React.Component {
                 })
             break
             //Documents
-            default :
+            case 'Documents':
+                console.log('Doc')
                 getDocumentAsync().then((result) => {
-                    if (!result.cancelled) {
+                    if (result.type === "success") {
                         this.setState({documents:[...this.state.documents,result]})
                     } else {
                         alert('Choix du document annulé')
                     }
                 })
+            break
         }
     }
 
@@ -390,19 +390,16 @@ export default class CreatePost extends React.Component {
                     numberOfLines={100}
                 />
                 <View style={styles.picker_container}>
-                    {this._picDocuments('DocumentPicker')}
+                    {this._picDocuments('Documents')}
                 </View>
                 <View style={styles.picker_container}>
-                    {this._picDocuments('ImagePicker')}
+                    {this._picDocuments('Images')}
                 </View>
                 <Text>Organisateurs:</Text>
                 <Picker selectedValue={this.state.picker} onValueChange={(value) => this._handlePickerValueChange(value)}>
                     <Picker.Item value={undefined} />
                     {this._organizersList()}
                 </Picker>
-                <View style={styles.picker_container}>
-                    {this._picDocuments('OrganizersPicker')}
-                </View>
                 <View style={styles.button_container} >
                     <Button title='Aperçu du post' onPress={()=>this._showPostExample()} />
                 </View>
@@ -426,15 +423,16 @@ const styles=StyleSheet.create({
         margin:5
     },
     title_input:{
-        borderColor:'blue',
+        borderColor:'gray',
         borderWidth:1,
-        marginBottom:3
+        marginBottom:3,
+        height:30
     },
     description_input:{
         textAlignVertical:"top",
         height:165,
         borderWidth:1,
-        borderColor:'blue'
+        borderColor:'gray'
     },
     switch_container:{
         flexDirection:'row',
@@ -461,5 +459,11 @@ const styles=StyleSheet.create({
     button_container:{
         alignItems:'flex-end',
         marginTop:5
+    },
+    document_item:{
+        height:50,
+        marginVertical:2,
+        flexDirection:'row',
+        justifyContent:'space-between'
     }
 })

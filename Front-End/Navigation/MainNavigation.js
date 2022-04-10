@@ -2,12 +2,11 @@
 import React from 'react'
 //Importer les components à utiliser pour la navigation et les icons
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { getIcon } from '../Images/icon'
+import Ionicons from '@expo/vector-icons/Ionicons'
 //Importer les vues
 import StackNavigationProfil from './StackNavigationProfil'
 import StackNavigationSearch from './StackNavigationSearch'
 import StackNavigationAsso from './StackNavigationOrganigramme'
-
 
 
 
@@ -16,6 +15,14 @@ export default class Navigation extends React.Component{
     constructor(props){
         super(props)
     }
+
+    //Récupérer le component Ionicons 
+    _getIcon = (nameIcon) => () => (
+        <Ionicons 
+            name = {nameIcon}
+            size = {25}
+        />
+    )
 
     //Récupérer le nombre de post non-lu depuis la dernière connexion à l'application
     _getNotificationBadges = () => {
@@ -40,7 +47,7 @@ export default class Navigation extends React.Component{
                     name='Posts'
                     component={StackNavigationSearch}
                     options={{
-                        tabBarIcon:getIcon('create'),
+                        tabBarIcon:this._getIcon('create'),
                         tabBarBadge:3 //this._getNotificationBadges()
                     }}
                 />
@@ -48,14 +55,14 @@ export default class Navigation extends React.Component{
                     name='Asso'
                     component={StackNavigationAsso}
                     options={{
-                        tabBarIcon:getIcon('people-outline')
+                        tabBarIcon:this._getIcon('people-outline')
                     }}
                 />
                 <Tab.Screen
                     name='Profil'
                     component={StackNavigationProfil}
                     options={{
-                        tabBarIcon:getIcon('person-circle-outline')
+                        tabBarIcon:this._getIcon('person-circle-outline')
                     }}
                 />
             </Tab.Navigator>
