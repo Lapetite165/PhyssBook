@@ -9,8 +9,10 @@ import { Picker } from "@react-native-picker/picker";
 import moment from "moment";
 //Importer le document picker 
 import { getDocumentAsync } from "expo-document-picker";
-//Importer le component DocumentsList pour faire afficher les documents choisis
-import DocumentsList from "./DocumentsList";
+//Importer les données des assos
+import { AssoData } from "../../../Helpers/AssoData";
+//Importer Ionicons
+import { getIcon } from "../../../Images/icon";
 
 export default class CreatePost extends React.Component {
 
@@ -31,7 +33,8 @@ export default class CreatePost extends React.Component {
             show:false,
             documents:[],
             postImages:[],
-            picker:undefined
+            picker:undefined,
+            currentDate:new Date(Date.now())
         }
     }
 
@@ -85,9 +88,9 @@ export default class CreatePost extends React.Component {
                             console.log('OnChange')
                             console.log(date.nativeEvent.timestamp)
                             const currentDate = date.nativeEvent.timestamp || this.state.startingDate
-                            const show1=!this.state.show
-                            this.setState({show:show1})
+                            const show1 = !this.state.show
                             this.setState({startingDate:currentDate})
+                            this.setState({show:show1})
                             if (this.state.mode === 'date'){
                                 this._showMode('time', 'start')
                             }
@@ -105,8 +108,8 @@ export default class CreatePost extends React.Component {
                             console.log(date.nativeEvent.timestamp)
                             const currentDate = date.nativeEvent.timestamp || this.state.endingDate
                             const show1=!this.state.show
-                            this.setState({show:show1})
                             this.setState({endingDate:currentDate})
+                            this.setState({show:show1})
                             if (this.state.mode === 'date'){
                                 this._showMode('time', 'end')
                             }
@@ -136,13 +139,22 @@ export default class CreatePost extends React.Component {
 
     //Méthode générale pour sélectionner un document
     _picDocuments = (documentype) => {
+        const items = this._showDocumentsSelector(documentype)
         return (
             <View>
                 <Button title={documentype} onPress={() => this._documentsSelector(documentype)} />
-                <DocumentsList
-                    documentype={documentype}
-                    items={this._showDocumentsSelector(documentype)}
-                    removeFromList={this._removeFromList}
+                <FlatList
+                    scrollEnabled={false}
+                    data={items}
+                    keyExtractor={(item) => items.indexOf(item) }
+                    renderItem={({item}) => (
+                        <View style={styles.document_item} >
+                            <Text>{">" + item.name}</Text>
+                            <Pressable onPress={()=>{this._removeFromList(documentype, item)}}>
+                                {getIcon("close-circle-outline")}
+                            </Pressable>
+                        </View>  
+                    )}
                 />
             </View>
         )
@@ -151,53 +163,53 @@ export default class CreatePost extends React.Component {
     //Méthode permettant de supprimer des documents du selecteur
     _removeFromList = (documentype, item) => {
         let id
-        console.log('RemoveFromList')
+        //console.log('RemoveFromList')
         switch(documentype){
             case 'BackgroundImagePicker':
-                console.log(this.state)
-                console.log(item)
+                //console.log(this.state)
+                //console.log(item)
                 id = this.state.backgroundImage.indexOf(item)
-                console.log(id)
+                //console.log(id)
                 if (id != -1) {
                     const backgroundImage = [...this.state.backgroundImage]
                     backgroundImage.splice(id, 1)
-                    console.log(backgroundImage)
+                    //console.log(backgroundImage)
                     this.setState({backgroundImage:backgroundImage})
                 }
             break
             case 'ImagePicker':
-                console.log(this.state)
-                console.log(item)
+                //console.log(this.state)
+                //console.log(item)
                 id = this.state.postImages.indexOf(item)
-                console.log(id)
+                //console.log(id)
                 if (id != -1) {
                     const images = [...this.state.postImages]
                     images.splice(id, 1)
-                    console.log(images)
+                    //console.log(images)
                     this.setState({postImages:images})
                 }
             break
             case 'OrganizersPicker':
-                console.log(this.state)
-                console.log(item)
+                //console.log(this.state)
+                //console.log(item)
                 id = this.organizers.indexOf(item)
-                console.log(id)
+                //console.log(id)
                 if (id != -1) {
                     const organizers = [...this.organizers]
                     images.splice(id, 1)
-                    console.log(organizers)
+                    //console.log(organizers)
                     this.organizers=organizers
                 }
             break
             default:
-                console.log(this.state)
-                console.log(item)
+                //console.log(this.state)
+                //console.log(item)
                 id = this.state.documents.indexOf(item)
-                console.log(id)
+                //console.log(id)
                 if (id != -1) {
                     const documents = [...this.state.documents]
                     documents.splice(id, 1)
-                    console.log(documents)
+                    //console.log(documents)
                     this.setState({documents:documents})
                 }
 
@@ -241,7 +253,7 @@ export default class CreatePost extends React.Component {
 
     //Gérer le selecteur pour les organisateurs
     _handlePickerValueChange = (value) => {
-        console.log(this.organizers)
+        //console.log(this.organizers)
         this.setState({picker:value})
         if (value != undefined && this.organizers.indexOf(value) === -1){
             this.organizers.push(value)
@@ -258,9 +270,11 @@ export default class CreatePost extends React.Component {
 
     //Gérer la validation des données
     _dataValidation(){
-        if (this.state.endingDate <= this.state.startingDate){
-            alert("La date de fin de l'évènement est avant sa date de début.")
-            return false
+        if (this.state.events){
+            if (this.state.endingDate <= this.state.startingDate){
+                alert("La date de fin de l'évènement est avant sa date de début.")
+                return false
+            }
         }
         if (this.title === ""){
             alert("Il n'y a pas de titre pour le post.")
@@ -273,9 +287,11 @@ export default class CreatePost extends React.Component {
         }
         if (this.organizers[0] === undefined) {
             alert("Il n'y a pas d'organisateurs pour la manip.")
+            return false
         }
         if (this.state.anciens === false && this.state.puntos === false){
-            alert("Pour qui le post est adressé ? Anciens ou Puntos")
+            alert("Pour qui le post est adressé ? Anciens et/ou Puntos")
+            return false
         }
     }
 
@@ -290,8 +306,9 @@ export default class CreatePost extends React.Component {
                 postImages:this.state.postImages,
                 documents: this.state.documents,
                 organizers:this.organizers,
-                startingDate:moment(this.state.startingDate).format('DD/MM/YYYY'),
-                endingDate:moment(this.state.endingDate).format('DD/MM/YYYY'),
+                startingDate:this.state.startingDate,
+                endingDate:this.state.endingDate,
+                currentDate:new Date(Date.now()),
                 viewability:{
                     anciens:this.state.anciens,
                     puntos:this.state.puntos
@@ -315,8 +332,8 @@ export default class CreatePost extends React.Component {
     }
 
     render(){
-        console.log('Render')
-        console.log(this.organizers)
+        //console.log('Render')
+        //console.log(this.organizers)
         return(
             <ScrollView style={styles.body_container}>
                 <Text style={styles.title}>Création de post</Text>
@@ -383,11 +400,9 @@ export default class CreatePost extends React.Component {
                     <Picker.Item value={undefined} />
                     {this._organizersList()}
                 </Picker>
-                <DocumentsList
-                    documentype={"OrganizersPicker"}
-                    items={this._showDocumentsSelector()}
-                    removeFromList={this._removeFromList}
-                />
+                <View style={styles.picker_container}>
+                    {this._picDocuments('OrganizersPicker')}
+                </View>
                 <View style={styles.button_container} >
                     <Button title='Aperçu du post' onPress={()=>this._showPostExample()} />
                 </View>

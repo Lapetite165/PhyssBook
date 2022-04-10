@@ -1,7 +1,8 @@
 import React from "react";
-import { Button, StyleSheet, Text, View, Linking, Image } from "react-native";
+import { Button, StyleSheet, Text, View, Linking } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { user } from "../../Helpers/AssoData";
+import Avatar from "./Avatar";
 
 class Profil extends React.Component {
 
@@ -30,6 +31,7 @@ class Profil extends React.Component {
         return (
             <View style={styles.body}>
                 <Text style={styles.header}>Bonjoür</Text>
+                <Avatar/>
                 <Text style={styles.header}>{user.bucque} {user.famss}</Text>
                 <Text style={styles.title}>Description</Text>
                 <Text style={styles.description}>
