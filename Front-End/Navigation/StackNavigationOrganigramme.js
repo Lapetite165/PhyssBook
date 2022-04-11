@@ -2,7 +2,7 @@
 import React from "react"
 //Importer les components à utiliser pour la navigation et les icons
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import { getIcon } from "../Images/icon"
+import Ionicons from '@expo/vector-icons/Ionicons'
 //Importer les vues
 import Organigramme from "../Components/Organigramme/Organigramme"
 import AssoDetails from "../Components/List/AssoDetails"
@@ -36,9 +36,9 @@ export default class StackNavigationAsso extends React.Component{
             <Stack.Navigator>
                 <Stack.Screen 
                     name='Asso et Comités'
-                    options={
-                        ()=>({headerRight: ()=>getIcon('search-outline', this._toggleSearchBar())})
-                    }
+                    options={{
+                        headerRight: () => {return <Ionicons onPress={() => this._toggleSearchBar()} name = {'search-outline'} size = {25}/>}
+                    }}
                 >
                     {(props)=><Organigramme {...props} extraData={properties}/>}
                 </Stack.Screen>

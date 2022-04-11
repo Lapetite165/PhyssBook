@@ -20,8 +20,12 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSRemindersUsageDescription":"We need Calendar Permission to create calendars and modify events."
+        "NSRemindersUsageDescription":"We need Calendar Permission to create calendars and modify events.",
+        "CFBundleAllowMixedLocalizations": true
       }
+    },
+    "locales": {
+      "fr": "./languages/french.json"
     },
     "android": {
       "adaptiveIcon": {
