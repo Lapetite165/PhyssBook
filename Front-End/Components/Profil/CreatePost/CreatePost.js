@@ -50,8 +50,8 @@ export default class CreatePost extends React.Component {
     _showDateTimePicker = () => {
         if (this.state.events === true){
             return (
-                <View>
-                    <View style={styles.date_container} >
+                <View style={styles.date_container}>
+                    <View style={styles.checkbox_container} >
                         <Pressable onPress={()=>{this._showMode('date', 'start')}} >
                             <Text style={styles.date} >
                                 Date de début {moment(this.state.startingDate).format('DD/MM/YYYY')}
@@ -84,10 +84,10 @@ export default class CreatePost extends React.Component {
                         value={this.state.startingDate}
                         mode={this.state.mode}
                         is24Hour={true}
-                        onChange={(date)=>{
-                            console.log('OnChange')
-                            console.log(date.nativeEvent.timestamp)
-                            const currentDate = date.nativeEvent.timestamp || this.state.startingDate
+                        themeVariant="light"
+                        style={styles.RNDateTimePicker}
+                        onChange={(event,date)=>{
+                            const currentDate = date || this.state.startingDate
                             const show1 = !this.state.show
                             this.setState({startingDate:currentDate})
                             this.setState({show:show1})
@@ -103,10 +103,10 @@ export default class CreatePost extends React.Component {
                         value={this.state.endingDate}
                         mode={this.state.mode}
                         is24Hour={true}
-                        onChange={(date)=>{
-                            console.log('OnChange')
-                            console.log(date.nativeEvent.timestamp)
-                            const currentDate = date.nativeEvent.timestamp || this.state.endingDate
+                        themeVariant="light"
+                        style={styles.RNDateTimePicker}
+                        onChange={(event,date)=>{
+                            const currentDate = date || this.state.endingDate
                             const show1=!this.state.show
                             this.setState({endingDate:currentDate})
                             this.setState({show:show1})
@@ -137,13 +137,6 @@ export default class CreatePost extends React.Component {
     //Méthode générale pour sélectionner un document
     _picDocuments = (documentype) => {
         const items = this._showDocumentsSelector(documentype)
-        console.log(this.state)
-        console.log("BGI")
-        console.log(this.state.backgroundImage)
-        console.log("Doc")
-        console.log(this.state.documents)
-        console.log("Img")
-        console.log(this.state.postImages)
         return (
             <View>
                 <Button title={documentype} onPress={() => this._documentsSelector(documentype)} />
@@ -169,41 +162,28 @@ export default class CreatePost extends React.Component {
     //Méthode permettant de supprimer des documents du selecteur
     _removeFromList = (documentype, item) => {
         let id
-        //console.log('RemoveFromList')
         switch(documentype){
             case 'BackgroundImage':
-                //console.log(this.state)
-                //console.log(item)
                 id = this.state.backgroundImage.indexOf(item)
-                //console.log(id)
                 if (id != -1) {
                     const backgroundImage = [...this.state.backgroundImage]
                     backgroundImage.splice(id, 1)
-                    //console.log(backgroundImage)
                     this.setState({backgroundImage:backgroundImage})
                 }
             break
             case 'Images':
-                //console.log(this.state)
-                //console.log(item)
                 id = this.state.postImages.indexOf(item)
-                //console.log(id)
                 if (id != -1) {
                     const images = [...this.state.postImages]
                     images.splice(id, 1)
-                    //console.log(images)
                     this.setState({postImages:images})
                 }
             break
             case 'Documents':
-                //console.log(this.state)
-                //console.log(item)
                 id = this.state.documents.indexOf(item)
-                //console.log(id)
                 if (id != -1) {
                     const documents = [...this.state.documents]
                     documents.splice(id, 1)
-                    //console.log(documents)
                     this.setState({documents:documents})
                 }
             break
@@ -445,16 +425,20 @@ const styles=StyleSheet.create({
     },
     checkbox_container:{
         flexDirection:'row',
-        justifyContent:'space-evenly',
-        paddingVertical:8
-    },
-    date_container:{
-        flexDirection:'row',
-        justifyContent:'space-evenly',
+        justifyContent:'space-around',
+        paddingVertical:8,
         paddingBottom:5
     },
-    date:{
+    date_container:{
+        alignItems:'center',
+        paddingBottom:5
+    },
+    date:{ 
+        paddingHorizontal:8,
         textAlign:'center'
+    },
+    RNDateTimePicker:{
+        width:'30%'
     },
     button_container:{
         alignItems:'flex-end',

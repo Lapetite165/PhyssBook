@@ -11,7 +11,8 @@ class Search extends React.Component {
     super(props)
     this.state = {
       posts : [],
-      isLoading : false
+      isLoading : false,
+      searchBar: this.props.extraData
     }
     this.searchedText = ""
     this.page = 0
@@ -63,7 +64,7 @@ class Search extends React.Component {
   //Fonction permettant d'afficher 
   _toggleSearchBar=()=>{
     console.log('DisplaySearchBar')
-    //console.log(this.props.extraData)
+    console.log(this.props.extraData)
     if(this.props.extraData){
       return (
         <View style={styles.header_container}>
@@ -87,7 +88,6 @@ class Search extends React.Component {
       <View style={styles.main_container}>
         {this._toggleSearchBar()}
         {this._displayLoading()}
-        {}
         <View style={styles.main_container}>
           <List
             type='post'
