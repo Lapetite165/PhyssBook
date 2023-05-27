@@ -15,7 +15,9 @@ export class AgendaItem extends React.Component {
                 <View style={styles.agenda_item} >
                     <Text>De {data.startingDate} à {data.endingDate}</Text>
                     <Text style={styles.event_name}>{data.title}</Text>
-                    <Text style={styles.description_text} >Organisateurs de la manip : {data.organizers.join(', ')}</Text>
+                    <Text style={styles.description_text} >
+                        Organisateurs de la manip : {data.organizers.join(', ')}
+                    </Text>
                     <Text></Text>
                 </View>
             </Pressable>

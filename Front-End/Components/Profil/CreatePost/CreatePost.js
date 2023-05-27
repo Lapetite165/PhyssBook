@@ -38,7 +38,6 @@ export default class CreatePost extends React.Component {
         }
     }
 
-
     //Gérer le mode de fonctionnement du Date/Time Picker
     _showMode = (nextMode, type) => {
         //console.log('showMode')
@@ -357,7 +356,6 @@ export default class CreatePost extends React.Component {
                     </View>
                     {this._showDateTimePicker()}
                 </View>
-    
                 <TextInput 
                     onChangeText={(text) => {
                         this.overview = text

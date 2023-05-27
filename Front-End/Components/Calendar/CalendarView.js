@@ -50,8 +50,8 @@ class CalendarComponent extends React.Component {
                     items={markedEvents}
                       renderItem={(item) => (
                             <AgendaItem
-                            data={item}
-                            displayDetailsInTheList={this._displayDetailsInTheList}
+                                data={item}
+                                displayDetailsInTheList={this._displayDetailsInTheList}
                             />
                         )}
                     />

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, StyleSheet, Text, View, Linking } from "react-native";
+import { Button, StyleSheet, Text, View, Linking, ScrollView } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { user } from "../../Helpers/AssoData";
 import Avatar from "./Avatar";
@@ -25,11 +25,10 @@ class Profil extends React.Component {
         AsyncStorage.clear(error => console.log(error)).then(() => console.log('Storage cleaned'))
     }
 
-
     render () {
         const user = this.state.user
         return (
-            <View style={styles.body}>
+            <ScrollView style={styles.body}>
                 <Text style={styles.header}>Bonjoür</Text>
                 <Avatar/>
                 <Text style={styles.header}>{user.bucque} {user.famss}</Text>
@@ -53,7 +52,7 @@ class Profil extends React.Component {
                         onPress={() => {this._clearStorage()}}
                     />
                 </View>
-            </View>
+            </ScrollView>
         )
     }
 }

@@ -51,6 +51,7 @@ class Search extends React.Component {
   //Fonction permettant de rechercher un post dans la barre de recherche
   //page, totalPage et posts sont remis à zero à chaque fois que la fonction est appelée
   _searchPosts = () => {
+    console.log(this.searchedText)
     if (this.searchedText != '' && this.searchedText != undefined) {
       this.page = 0
       this.totalPages = 0

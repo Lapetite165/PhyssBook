@@ -47,7 +47,7 @@ class LoadingPage extends React.Component {
         this.setState({areLoading:'des calendriers 2/3'})
         getCalendarsId()
             .then(
-                this._getPushToken()
+                this._getMediaLibraryPermissions()
             )
     }
 
@@ -58,19 +58,25 @@ class LoadingPage extends React.Component {
                 () => null,
                 () => alert(
                     "Media Library Permission not allowed. On your phone : go to Settings>Apps>Permissions>...>Allow media library"
-                )
+                ),
+                this._getPushToken()
+
             )
     }
 
     _getPushToken = () => {
         this.setState({areLoading:'du token 4/4'})
-        registerForPushNotificationsAsync().then(token => {
-            //console.log(token)
-            if (token != undefined){
-                this.props.navigation.navigate('Mon Profil Login', {screen:'Profil'})
-                //this.props.dispatch(sendNotificationToken(token))
-            }
-        })
+        registerForPushNotificationsAsync()
+            .then(token => {
+                console.log(token)
+                if (token != undefined){
+                    this.props.navigation.navigate('Mon Profil Login', {screen:'Profil'})
+                    //this.props.dispatch(sendNotificationToken(token))
+                }
+            })
+            .then(
+                this.props.navigation.navigate('Mon Profil Login')
+            )
     }
 
     render(){
