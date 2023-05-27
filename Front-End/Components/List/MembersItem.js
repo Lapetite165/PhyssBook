@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         fontSize:28,
         paddingHorizontal:5,
-        textAlign:'center'
+        textAlign:'center',
+        fontFamily:'Zagots'
     },
     name_container:{
         flexDirection:'row',
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
         fontFamily:'Zagots'
     },
     member_famss:{
-        fontFamily:'Zagots',
+        fontFamily:"Num'ss Fam'ss",
         fontSize:30,
         textAlign:'center',
         paddingLeft:10
