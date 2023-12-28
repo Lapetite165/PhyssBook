@@ -1,5 +1,7 @@
 # PhyssBook
 PhyssBook est une application développée en [React Native](https://reactnative.dev) sur [Expo](https://expo.dev) et qui a pour but d'améliorer la gestion d'un organigramme et d'un calendrier pour l'Association des Elèves Arts et Métiers.
+Le nom s'inspire d'une réalisation précédente d'élèves de l'ENSAM. Ce projet en est la continuité.
+Merci à Harcameur pour la rédaction de la partie Back-End.
 Pour l'utiliser, installez le gestionnaire de paquets npm et le moteur d'exécution [Node.js](nodejs.org/Download) puis lancez un terminal et la commande :
 ```bash
 npm install
