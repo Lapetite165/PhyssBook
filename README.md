@@ -9,6 +9,6 @@ npm start
 ```
 dans le dossier [Front-End](/Front-End).
 La commande devrait permettre de télécharger les paquets inscrits dans le fichier [package.json](/Front-End/package.json) puis lancer automatiquement Expo où un QR Code sera généré sur le shell.
-Il est préférable d'avoir installer Expo sur un téléphone de le scanner pour une utilisation optimale d'Expo.
+Il est préférable d'avoir installer Expo sur un téléphone afin de le scanner pour une utilisation optimale d'Expo.
 En appuyant sur la touche "w", une version web est disponible.
 Une aide à l'installation de npm et Nodejs est disponible dans le fichier [helper](helper.md).
