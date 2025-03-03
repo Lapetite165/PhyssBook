@@ -12,3 +12,5 @@ La commande devrait permettre de télécharger les paquets inscrits dans le fich
 Il est préférable d'avoir installer Expo sur un téléphone afin de le scanner pour une utilisation optimale d'Expo.
 En appuyant sur la touche "w", une version web est disponible.
 Une aide à l'installation de npm et Nodejs est disponible dans le fichier [helper](helper.md).
+
+En cas de problème.s, les indications précédentes, vous pouvez créer un nouveau projet Expo avec Node et Javascript/Typescript (en transition de JS vers TS lors de l'interruption en Mai 2021) puis y déposer (copier-coller/glisser-déposer/git-clone/...) les fichiers adéquats.
