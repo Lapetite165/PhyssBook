@@ -1,1 +1,669 @@
-{"openapi":"3.0.2","info":{"title":"AssoAPI","version":"0.1.0"},"paths":{"/auth/token":{"post":{"tags":["Authentification"],"summary":"Login For Access Token","operationId":"login_for_access_token_auth_token_post","requestBody":{"content":{"application/x-www-form-urlencoded":{"schema":{"$ref":"#/components/schemas/Body_login_for_access_token_auth_token_post"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Token"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/auth/me":{"get":{"tags":["Authentification"],"summary":"Get Owner Info","operationId":"get_owner_info_auth_me_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Users"}}}}},"security":[{"OAuth2PasswordBearer":[]}]}},"/auth/modify":{"put":{"tags":["Authentification"],"summary":"Update Owner Info","operationId":"update_owner_info_auth_modify_put","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Users"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Users"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}},"security":[{"OAuth2PasswordBearer":[]}]}},"/auth/picture/{id}/add":{"post":{"tags":["Authentification"],"summary":"Add Picture","operationId":"add_picture_auth_picture__id__add_post","parameters":[{"required":true,"schema":{"title":"Id","type":"integer"},"name":"id","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/auth/picture/{id}/select/{pic_id}":{"post":{"tags":["Authentification"],"summary":"Select Picture","operationId":"select_picture_auth_picture__id__select__pic_id__post","parameters":[{"required":true,"schema":{"title":"Id","type":"integer"},"name":"id","in":"path"},{"required":true,"schema":{"title":"Pic Id","type":"integer"},"name":"pic_id","in":"path"},{"required":true,"schema":{"title":"Type","type":"string"},"name":"type","in":"query"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/asso/list":{"get":{"tags":["Asso"],"summary":"Get List Asso","operationId":"get_list_asso_asso_list_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"title":"Response Get List Asso Asso List Get","type":"array","items":{"$ref":"#/components/schemas/Asso"}}}}}}}},"/asso/id/{id}":{"get":{"tags":["Asso"],"summary":"Get Asso","operationId":"get_asso_asso_id__id__get","parameters":[{"required":true,"schema":{"title":"Id","type":"integer"},"name":"id","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Asso"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/asso/modify/{id}":{"put":{"tags":["Asso"],"summary":"Update Asso","operationId":"update_asso_asso_modify__id__put","parameters":[{"required":true,"schema":{"title":"Id","type":"integer"},"name":"id","in":"path"}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/AssoBase"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Asso"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}},"security":[{"OAuth2PasswordBearer":[]}]}},"/asso/picture/{id}/add":{"post":{"tags":["Asso"],"summary":"Add Picture","operationId":"add_picture_asso_picture__id__add_post","parameters":[{"required":true,"schema":{"title":"Id","type":"integer"},"name":"id","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/asso/picture/{id}/select/{pic_id}":{"post":{"tags":["Asso"],"summary":"Select Picture","operationId":"select_picture_asso_picture__id__select__pic_id__post","parameters":[{"required":true,"schema":{"title":"Id","type":"integer"},"name":"id","in":"path"},{"required":true,"schema":{"title":"Pic Id","type":"integer"},"name":"pic_id","in":"path"},{"required":true,"schema":{"title":"Type","type":"string"},"name":"type","in":"query"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/posts/publiclist":{"get":{"tags":["Posts"],"summary":"Get List Posts","operationId":"get_list_posts_posts_publiclist_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"title":"Response Get List Posts Posts Publiclist Get","type":"array","items":{"$ref":"#/components/schemas/Posts"}}}}}}}},"/posts/limitedlist":{"get":{"tags":["Posts"],"summary":"Get List Posts","operationId":"get_list_posts_posts_limitedlist_get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"title":"Response Get List Posts Posts Limitedlist Get","type":"array","items":{"$ref":"#/components/schemas/Posts"}}}}}},"security":[{"OAuth2PasswordBearer":[]}]}},"/posts/id/{id}":{"get":{"tags":["Posts"],"summary":"Get Posts","operationId":"get_posts_posts_id__id__get","parameters":[{"required":true,"schema":{"title":"Id","type":"integer"},"name":"id","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Posts"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/posts/create/":{"post":{"tags":["Posts"],"summary":"Create Posts","operationId":"create_posts_posts_create__post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/PostsCreate"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Posts"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}},"security":[{"OAuth2PasswordBearer":[]}]}},"/posts/modif/{id}":{"put":{"tags":["Posts"],"summary":"Update Posts","operationId":"update_posts_posts_modif__id__put","parameters":[{"required":true,"schema":{"title":"Id","type":"integer"},"name":"id","in":"path"}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Posts"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Posts"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}},"security":[{"OAuth2PasswordBearer":[]}]}},"/posts/delete/{id}":{"delete":{"tags":["Posts"],"summary":"Delete Posts","operationId":"delete_posts_posts_delete__id__delete","parameters":[{"required":true,"schema":{"title":"Id","type":"integer"},"name":"id","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"title":"Response Delete Posts Posts Delete  Id  Delete","type":"boolean"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}},"security":[{"OAuth2PasswordBearer":[]}]}},"/posts/picture/{id}/add":{"post":{"tags":["Posts"],"summary":"Add Picture","operationId":"add_picture_posts_picture__id__add_post","parameters":[{"required":true,"schema":{"title":"Id","type":"integer"},"name":"id","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/posts/picture/{id}/select/{pic_id}":{"post":{"tags":["Posts"],"summary":"Select Picture","operationId":"select_picture_posts_picture__id__select__pic_id__post","parameters":[{"required":true,"schema":{"title":"Id","type":"integer"},"name":"id","in":"path"},{"required":true,"schema":{"title":"Pic Id","type":"integer"},"name":"pic_id","in":"path"},{"required":true,"schema":{"title":"Type","type":"string"},"name":"type","in":"query"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/":{"get":{"summary":"Get Status","operationId":"get_status__get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}}},"components":{"schemas":{"Asso":{"title":"Asso","required":["name","peksname","overview","id"],"type":"object","properties":{"name":{"title":"Name","type":"string"},"peksname":{"title":"Peksname","type":"string"},"overview":{"title":"Overview","type":"string"},"asso_color":{"title":"Asso Color","type":"array","items":{"$ref":"#/components/schemas/AssoColor"}},"asso_picture":{"title":"Asso Picture","type":"array","items":{"$ref":"#/components/schemas/AssoBackgroundImages"}},"id":{"title":"Id","type":"integer"},"posts":{"title":"Posts","type":"array","items":{"$ref":"#/components/schemas/Posts"}}}},"AssoBackgroundImages":{"title":"AssoBackgroundImages","required":["name","filename","current"],"type":"object","properties":{"name":{"title":"Name","type":"string"},"filename":{"title":"Filename","type":"string"},"current":{"title":"Current","type":"boolean"}}},"AssoBase":{"title":"AssoBase","required":["name","peksname","overview"],"type":"object","properties":{"name":{"title":"Name","type":"string"},"peksname":{"title":"Peksname","type":"string"},"overview":{"title":"Overview","type":"string"},"asso_color":{"title":"Asso Color","type":"array","items":{"$ref":"#/components/schemas/AssoColor"}},"asso_picture":{"title":"Asso Picture","type":"array","items":{"$ref":"#/components/schemas/AssoBackgroundImages"}}}},"AssoBools":{"title":"AssoBools","required":["id","name","title","description","com","asso"],"type":"object","properties":{"id":{"title":"Id","type":"integer"},"name":{"title":"Name","type":"string"},"title":{"title":"Title","type":"string"},"description":{"title":"Description","type":"string"},"com":{"title":"Com","type":"boolean"},"asso":{"$ref":"#/components/schemas/Asso"}}},"AssoColor":{"title":"AssoColor","required":["value"],"type":"object","properties":{"value":{"title":"Value","type":"string"}}},"BackgroundImages":{"title":"BackgroundImages","required":["name","filename","id","posts_id","current"],"type":"object","properties":{"name":{"title":"Name","type":"string"},"filename":{"title":"Filename","type":"string"},"id":{"title":"Id","type":"integer"},"posts_id":{"title":"Posts Id","type":"integer"},"current":{"title":"Current","type":"boolean"}}},"BackgroundImagesCreate":{"title":"BackgroundImagesCreate","required":["name","filename"],"type":"object","properties":{"name":{"title":"Name","type":"string"},"filename":{"title":"Filename","type":"string"}}},"Body_login_for_access_token_auth_token_post":{"title":"Body_login_for_access_token_auth_token_post","required":["username","password"],"type":"object","properties":{"grant_type":{"title":"Grant Type","pattern":"password","type":"string"},"username":{"title":"Username","type":"string"},"password":{"title":"Password","type":"string"},"scope":{"title":"Scope","type":"string","default":""},"client_id":{"title":"Client Id","type":"string"},"client_secret":{"title":"Client Secret","type":"string"}}},"HTTPValidationError":{"title":"HTTPValidationError","type":"object","properties":{"detail":{"title":"Detail","type":"array","items":{"$ref":"#/components/schemas/ValidationError"}}}},"Keyword":{"title":"Keyword","required":["name"],"type":"object","properties":{"name":{"title":"Name","type":"string"}}},"Posts":{"title":"Posts","required":["title","overview","starting_date","ending_date","creating_date","asso_id","id","users_id","restrictions"],"type":"object","properties":{"title":{"title":"Title","type":"string"},"overview":{"title":"Overview","type":"string"},"starting_date":{"title":"Starting Date","type":"string"},"ending_date":{"title":"Ending Date","type":"string"},"creating_date":{"title":"Creating Date","type":"string"},"asso_id":{"title":"Asso Id","type":"integer"},"id":{"title":"Id","type":"integer"},"users_id":{"title":"Users Id","type":"integer"},"restrictions":{"$ref":"#/components/schemas/Restrictions"},"keyword":{"title":"Keyword","type":"array","items":{"$ref":"#/components/schemas/Keyword"}},"background_images":{"title":"Background Images","type":"array","items":{"$ref":"#/components/schemas/BackgroundImages"}},"posts_images":{"title":"Posts Images","type":"array","items":{"$ref":"#/components/schemas/PostsImages"}}}},"PostsCreate":{"title":"PostsCreate","required":["title","overview","starting_date","ending_date","creating_date","asso_id","restrictions_id"],"type":"object","properties":{"title":{"title":"Title","type":"string"},"overview":{"title":"Overview","type":"string"},"starting_date":{"title":"Starting Date","type":"string"},"ending_date":{"title":"Ending Date","type":"string"},"creating_date":{"title":"Creating Date","type":"string"},"asso_id":{"title":"Asso Id","type":"integer"},"restrictions_id":{"title":"Restrictions Id","type":"integer"},"background_images":{"title":"Background Images","type":"array","items":{"$ref":"#/components/schemas/BackgroundImagesCreate"}},"posts_images":{"title":"Posts Images","type":"array","items":{"$ref":"#/components/schemas/PostsImagesCreate"}}}},"PostsImages":{"title":"PostsImages","required":["name","filename","id","posts_id"],"type":"object","properties":{"name":{"title":"Name","type":"string"},"filename":{"title":"Filename","type":"string"},"id":{"title":"Id","type":"integer"},"posts_id":{"title":"Posts Id","type":"integer"}}},"PostsImagesCreate":{"title":"PostsImagesCreate","required":["name","filename"],"type":"object","properties":{"name":{"title":"Name","type":"string"},"filename":{"title":"Filename","type":"string"}}},"Restrictions":{"title":"Restrictions","required":["id","name","filename"],"type":"object","properties":{"id":{"title":"Id","type":"integer"},"name":{"title":"Name","type":"string"},"filename":{"title":"Filename","type":"string"}}},"Token":{"title":"Token","required":["access_token","token_type"],"type":"object","properties":{"access_token":{"title":"Access Token","type":"string"},"token_type":{"title":"Token Type","type":"string"}}},"Users":{"title":"Users","required":["name","bucque","fam_ss","email","id","users_status"],"type":"object","properties":{"name":{"title":"Name","type":"string"},"bucque":{"title":"Bucque","type":"string"},"fam_ss":{"title":"Fam Ss","type":"string"},"email":{"title":"Email","type":"string"},"id":{"title":"Id","type":"integer"},"users_status":{"title":"Users Status","type":"integer"},"asso_bools":{"title":"Asso Bools","type":"array","items":{"$ref":"#/components/schemas/AssoBools"}},"posts":{"title":"Posts","type":"array","items":{"$ref":"#/components/schemas/Posts"}}}},"ValidationError":{"title":"ValidationError","required":["loc","msg","type"],"type":"object","properties":{"loc":{"title":"Location","type":"array","items":{"type":"string"}},"msg":{"title":"Message","type":"string"},"type":{"title":"Error Type","type":"string"}}}},"securitySchemes":{"OAuth2PasswordBearer":{"type":"oauth2","flows":{"password":{"scopes":{},"tokenUrl":"auth/token"}}}}}}
+{
+    "openapi":"3.0.2",
+    "info":{
+        "title":"AssoAPI",
+        "version":"0.1.0"
+    },
+    "paths":{
+        "/auth/token":{
+            "post":{
+                "tags":["Authentification"],
+                "summary":"Login For Access Token",
+                "operationId":"login_for_access_token_auth_token_post",
+                "requestBody":{
+                    "content":{
+                        "application/x-www-form-urlencoded":{
+                            "schema":{"$ref":"#/components/schemas/Body_login_for_access_token_auth_token_post"}
+                        }
+                    },
+                    "required":true
+                },
+                "responses":{
+                    "200":{
+                        "description":"Successful Response",
+                        "content":{
+                            "application/json":{
+                                "schema":{"$ref":"#/components/schemas/Token"}
+                            }
+                        }
+                    },
+                    "422":{
+                        "description":"Validation Error",
+                        "content":{
+                            "application/json":{
+                                "schema":{"$ref":"#/components/schemas/HTTPValidationError"}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/me":{
+            "get":{
+                "tags":["Authentification"],
+                "summary":"Get Owner Info",
+                "operationId":"get_owner_info_auth_me_get",
+                "responses":{
+                    "200":{
+                        "description":"Successful Response",
+                        "content":{
+                            "application/json":{
+                                "schema":{"$ref":"#/components/schemas/Users"}
+                            }
+                        }
+                    }
+                },
+                "security":[{"OAuth2PasswordBearer":[]}]
+            }
+        },
+        "/auth/modify":{
+            "put":{
+                "tags":["Authentification"],
+                "summary":"Update Owner Info",
+                "operationId":"update_owner_info_auth_modify_put",
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{"$ref":"#/components/schemas/Users"}
+                        }
+                    },
+                    "required":true
+                },
+                "responses":{
+                    "200":{
+                        "description":"Successful Response",
+                        "content":{
+                            "application/json":{
+                                "schema":{"$ref":"#/components/schemas/Users"}
+                            }
+                        }
+                    },
+                    "422":{
+                        "description":"Validation Error",
+                        "content":{
+                            "application/json":{
+                                "schema":{"$ref":"#/components/schemas/HTTPValidationError"}
+                            }
+                        }
+                    }
+                },
+                "security":[{"OAuth2PasswordBearer":[]}]
+            }
+        },
+        "/auth/picture/{id}/add":{
+            "post":{
+                "tags":["Authentification"],
+                "summary":"Add Picture",
+                "operationId":"add_picture_auth_picture__id__add_post",
+                "parameters":[{
+                    "required":true,
+                    "schema":{"title":"Id","type":"integer"},
+                    "name":"id",
+                    "in":"path"
+                }],
+                "responses":{
+                    "200":{
+                        "description":"Successful Response",
+                        "content":{
+                            "application/json":{
+                                "schema":{}
+                            }
+                        }
+                    },
+                    "422":{
+                        "description":"Validation Error",
+                        "content":{
+                            "application/json":{
+                                "schema":{"$ref":"#/components/schemas/HTTPValidationError"}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/picture/{id}/select/{pic_id}":{
+            "post":{
+                "tags":["Authentification"],
+                "summary":"Select Picture",
+                "operationId":"select_picture_auth_picture__id__select__pic_id__post",
+                "parameters":[{
+                    "required":true,
+                    "schema":{"title":"Id","type":"integer"},
+                    "name":"id",
+                    "in":"path"
+                },{
+                    "required":true,
+                    "schema":{"title":"Pic Id","type":"integer"},
+                    "name":"pic_id","in":"path"
+                },{
+                    "required":true,
+                    "schema":{"title":"Type","type":"string"},
+                    "name":"type","in":"query"
+                }],
+                "responses":{
+                    "200":{
+                        "description":"Successful Response",
+                        "content":{
+                            "application/json":{
+                                "schema":{}
+                            }
+                        }
+                    },
+                    "422":{
+                        "description":"Validation Error",
+                        "content":{
+                            "application/json":{
+                                "schema":{"$ref":"#/components/schemas/HTTPValidationError"}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/asso/list":{
+            "get":{
+                "tags":["Asso"],
+                "summary":"Get List Asso",
+                "operationId":"get_list_asso_asso_list_get",
+                "responses":{
+                    "200":{
+                        "description":"Successful Response",
+                        "content":{
+                            "application/json":{
+                                "schema":{"title":"Response Get List Asso Asso List Get","type":"array","items":{"$ref":"#/components/schemas/Asso"}}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/asso/id/{id}":{
+            "get":{
+                "tags":["Asso"],
+                "summary":"Get Asso",
+                "operationId":"get_asso_asso_id__id__get",
+                "parameters":[{
+                    "required":true,
+                    "schema":{"title":"Id","type":"integer"},
+                    "name":"id",
+                    "in":"path"
+                }],
+                "responses":{
+                    "200":{
+                        "description":"Successful Response",
+                        "content":{
+                            "application/json":{
+                                "schema":{"$ref":"#/components/schemas/Asso"}
+                            }
+                        }
+                    },
+                    "422":{
+                        "description":"Validation Error",
+                        "content":{
+                            "application/json":{
+                                "schema":{"$ref":"#/components/schemas/HTTPValidationError"}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/asso/modify/{id}":{
+            "put":{
+                "tags":["Asso"],
+                "summary":"Update Asso",
+                "operationId":"update_asso_asso_modify__id__put",
+                "parameters":[{
+                    "required":true,
+                    "schema":{"title":"Id","type":"integer"},
+                    "name":"id",
+                    "in":"path"
+                }],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{"$ref":"#/components/schemas/AssoBase"}
+                        }
+                    },
+                    "required":true
+                },
+                "responses":{
+                    "200":{
+                        "description":"Successful Response",
+                        "content":{
+                            "application/json":{
+                                "schema":{"$ref":"#/components/schemas/Asso"}
+                            }
+                        }
+                    },
+                    "422":{
+                        "description":"Validation Error",
+                        "content":{
+                            "application/json":{
+                                "schema":{"$ref":"#/components/schemas/HTTPValidationError"}
+                            }
+                        }
+                    }
+                },
+                "security":[{"OAuth2PasswordBearer":[]}]
+            }
+        },
+        "/asso/picture/{id}/add":{
+            "post":{
+                "tags":["Asso"],
+                "summary":"Add Picture",
+                "operationId":"add_picture_asso_picture__id__add_post",
+                "parameters":[{
+                    "required":true,
+                    "schema":{"title":"Id","type":"integer"},
+                    "name":"id",
+                    "in":"path"
+                }],
+                "responses":{
+                    "200":{
+                        "description":"Successful Response",
+                        "content":{
+                            "application/json":{
+                                "schema":{}
+                            }
+                        }
+                    },
+                    "422":{
+                        "description":"Validation Error",
+                        "content":{
+                            "application/json":{
+                                "schema":{"$ref":"#/components/schemas/HTTPValidationError"}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/asso/picture/{id}/select/{pic_id}":{
+            "post":{
+                "tags":["Asso"],
+                "summary":"Select Picture",
+                "operationId":"select_picture_asso_picture__id__select__pic_id__post",
+                "parameters":[{
+                    "required":true,
+                    "schema":{"title":"Id","type":"integer"},
+                    "name":"id",
+                    "in":"path"
+                },{
+                    "required":true,
+                    "schema":{"title":"Pic Id","type":"integer"},
+                    "name":"pic_id",
+                    "in":"path"
+                },{
+                    "required":true,
+                    "schema":{"title":"Type","type":"string"},
+                    "name":"type",
+                    "in":"query"
+                }],
+                "responses":{
+                    "200":{
+                        "description":"Successful Response",
+                        "content":{
+                            "application/json":{
+                                "schema":{}
+                            }
+                        }
+                    },
+                    "422":{
+                        "description":"Validation Error",
+                        "content":{
+                            "application/json":{
+                                "schema":{"$ref":"#/components/schemas/HTTPValidationError"}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/posts/publiclist":{
+            "get":{
+                "tags":["Posts"],
+                "summary":"Get List Posts",
+                "operationId":"get_list_posts_posts_publiclist_get",
+                "responses":{
+                    "200":{
+                        "description":"Successful Response",
+                        "content":{
+                            "application/json":{
+                                "schema":{"title":"Response Get List Posts Posts Publiclist Get","type":"array","items":{"$ref":"#/components/schemas/Posts"}}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/posts/limitedlist":{
+            "get":{
+                "tags":["Posts"],
+                "summary":"Get List Posts",
+                "operationId":"get_list_posts_posts_limitedlist_get",
+                "responses":{
+                    "200":{
+                        "description":"Successful Response",
+                        "content":{
+                            "application/json":{
+                                "schema":{"title":"Response Get List Posts Posts Limitedlist Get","type":"array","items":{"$ref":"#/components/schemas/Posts"}}
+                            }
+                        }
+                    }
+                },
+                "security":[{"OAuth2PasswordBearer":[]}]
+            }
+        },
+        "/posts/id/{id}":{
+            "get":{
+                "tags":["Posts"],
+                "summary":"Get Posts",
+                "operationId":"get_posts_posts_id__id__get",
+                "parameters":[{
+                    "required":true,
+                    "schema":{"title":"Id","type":"integer"},
+                    "name":"id",
+                    "in":"path"
+                }],
+                "responses":{
+                    "200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Posts"}}}},
+                    "422":{
+                        "description":"Validation Error",
+                        "content":{
+                            "application/json":{
+                                "schema":{"$ref":"#/components/schemas/HTTPValidationError"}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/posts/create/":{
+            "post":{
+                "tags":["Posts"],
+                "summary":"Create Posts",
+                "operationId":"create_posts_posts_create__post","requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/PostsCreate"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Posts"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}},"security":[{"OAuth2PasswordBearer":[]}]}},
+        "/posts/modif/{id}":{
+            "put":{
+                "tags":["Posts"],
+                "summary":"Update Posts",
+                "operationId":"update_posts_posts_modif__id__put","parameters":[{"required":true,"schema":{"title":"Id","type":"integer"},"name":"id","in":"path"}],"requestBody":{"content":{"application/json":{"schema":{"$ref":"#/components/schemas/Posts"}}},"required":true},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"$ref":"#/components/schemas/Posts"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}},"security":[{"OAuth2PasswordBearer":[]}]}},
+        "/posts/delete/{id}":{
+            "delete":{
+                "tags":["Posts"],
+                "summary":"Delete Posts",
+                "operationId":"delete_posts_posts_delete__id__delete","parameters":[{"required":true,"schema":{"title":"Id","type":"integer"},"name":"id","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{"title":"Response Delete Posts Posts Delete  Id  Delete","type":"boolean"}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}},"security":[{"OAuth2PasswordBearer":[]}]}},
+        "/posts/picture/{id}/add":{
+            "post":{
+                "tags":["Posts"],
+                "summary":"Add Picture",
+                "operationId":"add_picture_posts_picture__id__add_post","parameters":[{"required":true,"schema":{"title":"Id","type":"integer"},"name":"id","in":"path"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},
+        "/posts/picture/{id}/select/{pic_id}":{
+            "post":{
+                "tags":["Posts"],
+                "summary":"Select Picture",
+                "operationId":"select_picture_posts_picture__id__select__pic_id__post",
+                "parameters":[{"required":true,"schema":{"title":"Id","type":"integer"},"name":"id","in":"path"},{"required":true,"schema":{"title":"Pic Id","type":"integer"},"name":"pic_id","in":"path"},{"required":true,"schema":{"title":"Type","type":"string"},"name":"type","in":"query"}],
+                "responses":{
+                    "200":{
+                        "description":"Successful Response",
+                        "content":{
+                            "application/json":{"schema":{}}
+                        }
+                    },
+                    "422":{
+                        "description":"Validation Error",
+                        "content":{
+                            "application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}
+                        }
+                    }
+                }
+            }
+        },
+        "/":{
+            "get":{
+                "summary":"Get Status",
+                "operationId":"get_status__get",
+                "responses":{
+                    "200":{
+                        "description":"Successful Response",
+                        "content":{
+                            "application/json":{"schema":{}}
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components":{
+        "schemas":{
+            "Asso":{
+                "title":"Asso",
+                "required":["name","peksname","overview","id"],
+                "type":"object",
+                "properties":{
+                    "name":{"title":"Name","type":"string"},
+                    "peksname":{"title":"Peksname","type":"string"},
+                    "overview":{"title":"Overview","type":"string"},
+                    "asso_color":{"title":"Asso Color","type":"array","items":{"$ref":"#/components/schemas/AssoColor"}},
+                    "asso_picture":{"title":"Asso Picture","type":"array","items":{"$ref":"#/components/schemas/AssoBackgroundImages"}},
+                    "id":{"title":"Id","type":"integer"},
+                    "posts":{
+                        "title":"Posts",
+                        "type":"array",
+                        "items":{"$ref":"#/components/schemas/Posts"}}}},
+                    "AssoBackgroundImages":{
+                        "title":"AssoBackgroundImages",
+                        "required":["name","filename","current"],
+                        "type":"object",
+                        "properties":{
+                            "name":{"title":"Name","type":"string"},
+                            "filename":{"title":"Filename","type":"string"},
+                            "current":{"title":"Current","type":"boolean"}
+                        }
+                    },
+                    "AssoBase":{
+                        "title":"AssoBase",
+                        "required":["name","peksname","overview"],
+                        "type":"object",
+                        "properties":{
+                            "name":{"title":"Name","type":"string"},
+                            "peksname":{"title":"Peksname","type":"string"},
+                            "overview":{"title":"Overview","type":"string"},
+                            "asso_color":{"title":"Asso Color","type":"array","items":{"$ref":"#/components/schemas/AssoColor"}},
+                            "asso_picture":{"title":"Asso Picture","type":"array","items":{"$ref":"#/components/schemas/AssoBackgroundImages"}}
+                        }
+                    },
+                    "AssoBools":{
+                        "title":"AssoBools",
+                        "required":["id","name","title","description","com","asso"],
+                        "type":"object",
+                        "properties":{
+                            "id":{"title":"Id","type":"integer"},
+                            "name":{"title":"Name","type":"string"},
+                            "title":{"title":"Title","type":"string"},
+                            "description":{"title":"Description","type":"string"},
+                            "com":{"title":"Com","type":"boolean"},
+                            "asso":{"$ref":"#/components/schemas/Asso"}
+                        }
+                    },
+                    "AssoColor":{
+                        "title":"AssoColor",
+                        "required":["value"],
+                        "type":"object",
+                        "properties":{
+                            "value":{
+                                "title":"Value",
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "BackgroundImages":{
+                        "title":"BackgroundImages",
+                        "required":["name","filename","id","posts_id","current"],
+                        "type":"object",
+                        "properties":{
+                            "name":{
+                                "title":"Name",
+                                "type":"string"
+                            },
+                            "filename":{"title":"Filename","type":"string"},
+                            "id":{"title":"Id","type":"integer"},
+                            "posts_id":{"title":"Posts Id","type":"integer"},
+                            "current":{"title":"Current","type":"boolean"}
+                        }
+                    },
+                    "BackgroundImagesCreate":{
+                        "title":"BackgroundImagesCreate",
+                        "required":["name","filename"],
+                        "type":"object",
+                        "properties":{
+                            "name":{"title":"Name","type":"string"},
+                            "filename":{"title":"Filename","type":"string"}
+                        }
+                    },
+                    "Body_login_for_access_token_auth_token_post":{
+                        "title":"Body_login_for_access_token_auth_token_post",
+                        "required":["username","password"],
+                        "type":"object",
+                        "properties":{
+                            "grant_type":{"title":"Grant Type","pattern":"password","type":"string"},
+                            "username":{"title":"Username","type":"string"},
+                            "password":{"title":"Password","type":"string"},
+                            "scope":{"title":"Scope","type":"string","default":""},
+                            "client_id":{"title":"Client Id","type":"string"},
+                            "client_secret":{"title":"Client Secret","type":"string"}
+                        }
+                    },
+                    "HTTPValidationError":{
+                        "title":"HTTPValidationError",
+                        "type":"object",
+                        "properties":{
+                            "detail":{
+                                "title":"Detail",
+                                "type":"array",
+                                "items":{"$ref":"#/components/schemas/ValidationError"}
+                            }
+                        }
+                    },
+                    "Keyword":{
+                        "title":"Keyword",
+                        "required":["name"],
+                        "type":"object",
+                        "properties":{
+                            "name":{"title":"Name","type":"string"}
+                        }
+                    },
+                    "Posts":{
+                        "title":"Posts",
+                        "required":["title","overview","starting_date","ending_date","creating_date","asso_id","id","users_id","restrictions"],
+                        "type":"object",
+                        "properties":{
+                            "title":{"title":"Title","type":"string"},
+                            "overview":{"title":"Overview","type":"string"},
+                            "starting_date":{"title":"Starting Date","type":"string"},
+                            "ending_date":{"title":"Ending Date","type":"string"},
+                            "creating_date":{"title":"Creating Date","type":"string"},
+                            "asso_va"id":{"title":"Id","type":"integer"},
+                            "users_id":{"title":"Users Id","type":"integer"},
+                            "restrictions":{"$ref":"#/components/schemas/Restrictions"},
+                            "keyword":{"title":"Keyword","type":"array","items":{"$ref":"#/components/schemas/Keyword"}},
+                            "background_images":{"title":"Background Images","type":"array","items":{"$ref":"#/components/schemas/BackgroundImages"}},
+                            "posts_images":{"title":"Posts Images","type":"array","items":{"$ref":"#/components/schemas/PostsImages"}}
+                        }
+                    },
+                    "PostsCreate":{
+                        "title":"PostsCreate",
+                        "required":["title","overview","starting_date","ending_date","creating_date","asso_id","restrictions_id"],
+                        "type":"object",
+                        "properties":{
+                            "title":{"title":"Title","type":"string"},
+                            "overview":{"title":"Overview","type":"string"},
+                            "starting_date":{"title":"Starting Date","type":"string"},
+                            "ending_date":{"title":"Ending Date","type":"string"},
+                            "creating_date":{"title":"Creating Date","type":"string"},
+                            "asso_id":{"title":"Asso Id","type":"integer"},
+                            "restrictions_id":{"title":"Restrictions Id","type":"integer"},
+                            "background_images":{"title":"Background Images","type":"array","items":{"$ref":"#/components/schemas/BackgroundImagesCreate"}},
+                            "posts_images":{"title":"Posts Images","type":"array","items":{"$ref":"#/components/schemas/PostsImagesCreate"}}
+                        }
+                    },
+                    "PostsImages":{
+                        "title":"PostsImages",
+                        "required":["name","filename","id","posts_id"],
+                        "type":"object",
+                        "properties":{
+                            "name":{"title":"Name","type":"string"},
+                            "filename":{"title":"Filename","type":"string"},
+                            "id":{"title":"Id","type":"integer"},
+                            "posts_id":{"title":"Posts Id","type":"integer"}
+                        }
+                    },
+                    "PostsImagesCreate":{
+                        "title":"PostsImagesCreate",
+                        "required":["name","filename"],
+                        "type":"object",
+                        "properties":{
+                            "name":{"title":"Name","type":"string"},
+                            "filename":{"title":"Filename","type":"string"}
+                        }
+                    },
+                    "Restrictions":{
+                        "title":"Restrictions",
+                        "required":["id","name","filename"],
+                        "type":"object",
+                        "properties":{
+                            "id":{"title":"Id","type":"integer"},
+                            "name":{"title":"Name","type":"string"},
+                            "filename":{"title":"Filename","type":"string"}
+                        }
+                    },
+                    "Token":{
+                        "title":"Token",
+                        "required":["access_token","token_type"],
+                        "type":"object",
+                        "properties":{
+                            "access_token":{"title":"Access Token","type":"string"},
+                            "token_type":{"title":"Token Type","type":"string"}
+                        }
+                    },
+                    "Users":{
+                        "title":"Users",
+                        "required":["name","bucque","fam_ss","email","id","users_status"],
+                        "type":"object",
+                        "properties":{
+                            "name":{"title":"Name","type":"string"},
+                            "bucque":{"title":"Bucque","type":"string"},
+                            "fam_ss":{"title":"Fam Ss","type":"string"},
+                            "email":{"title":"Email","type":"string"},
+                            "id":{"title":"Id","type":"integer"},
+                            "users_status":{"title":"Users Status","type":"integer"},
+                            "asso_bools":{"title":"Asso Bools","type":"array","items":{"$ref":"#/components/schemas/AssoBools"}},
+                            "posts":{"title":"Posts","type":"array","items":{"$ref":"#/components/schemas/Posts"}}
+                        }
+                    },
+                    "ValidationError":{
+                        "title":"ValidationError",
+                        "required":["loc","msg","type"],
+                        "type":"object",
+                        "properties":{
+                            "loc":{"title":"Location","type":"array","items":{"type":"string"}},
+                            "msg":{"title":"Message","type":"string"},
+                            "type":{"title":"Error Type","type":"string"}
+                        }
+                    }
+        },
+        "securitySchemes":{
+            "OAuth2PasswordBearer":{
+                "type":"oauth2",
+                "flows":{
+                    "password":{
+                        "scopes":{},
+                        "tokenUrl":"auth/token"
+                    }
+                }
+            }
+        }
+    }
+}
